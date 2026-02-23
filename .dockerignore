@@ -1,0 +1,4 @@
+.git
+*.md
+cmd/loggen
+internal/**/testdata

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RFGuard Alerts</title>
+  <link rel="stylesheet" href="/ui/styles.css" />
+</head>
+<body class="page-alerts">
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="title">RFGuard</div>
+        <div class="subtitle">Alert Detail View</div>
+      </div>
+      <nav class="nav">
+        <a href="/ui/">Dashboard</a>
+        <a class="active" href="/ui/alerts.html">Alerts</a>
+        <a href="/ui/access.html">Access Control</a>
+      </nav>
+    </header>
+
+    <section class="controls">
+      <button id="clear-alerts" class="ghost">Clear Alerts</button>
+      <span id="alert-status" class="muted"></span>
+    </section>
+
+    <main class="layout single">
+      <section class="card alerts-full">
+        <div class="card-header">
+          <h2>Alert Feed</h2>
+          <span id="alert-count" class="muted"></span>
+        </div>
+        <div class="table-wrap tall scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Reader</th>
+                <th>Severity</th>
+                <th>Type</th>
+                <th>Window</th>
+                <th>Score</th>
+                <th>Rules</th>
+                <th>APS</th>
+                <th>FR</th>
+                <th>UDS</th>
+                <th>TV</th>
+                <th>Context</th>
+              </tr>
+            </thead>
+            <tbody id="alerts-body"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/ui/alerts.js"></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RFGuard Dashboard</title>
+  <link rel="stylesheet" href="/ui/styles.css" />
+</head>
+<body class="page-dashboard">
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="title">RFGuard</div>
+        <div class="subtitle">Live NFC Anomaly Detection</div>
+      </div>
+      <nav class="nav">
+        <a class="active" href="/ui/">Dashboard</a>
+        <a href="/ui/alerts.html">Alerts</a>
+        <a href="/ui/access.html">Access Control</a>
+      </nav>
+    </header>
+
+    <section class="controls">
+      <button id="clear-logs" class="ghost">Clear Logs</button>
+      <button id="clear-metrics" class="ghost">Clear Metrics</button>
+      <button id="restart-engine" class="secondary">Restart Engine</button>
+      <span id="action-status" class="muted"></span>
+    </section>
+
+    <main class="layout">
+      <section class="card status">
+        <div class="card-header">
+          <h2>Status</h2>
+          <span class="badge" id="status-pill">Live</span>
+        </div>
+        <div id="status-content" class="stat-grid"></div>
+      </section>
+
+      <section class="card alerts">
+        <div class="card-header">
+          <h2>Alerts</h2>
+          <a href="/ui/alerts.html" class="muted">View details</a>
+        </div>
+        <div id="alert-list" class="scroll"></div>
+      </section>
+
+      <section class="card metrics">
+        <h2>Metrics</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Reader</th>
+                <th>Window</th>
+                <th>APS</th>
+                <th>FR</th>
+                <th>UDS</th>
+                <th>TV</th>
+                <th>Attempts</th>
+                <th>Failures</th>
+              </tr>
+            </thead>
+            <tbody id="metrics-body"></tbody>
+          </table>
+        </div>
+        <div id="metrics-empty" class="muted">No metrics yet.</div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/ui/app.js"></script>
+</body>
+</html>

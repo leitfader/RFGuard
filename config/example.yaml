@@ -1,0 +1,76 @@
+log_level: info
+
+ingest:
+  channel_buffer: 10000
+  rest:
+    enabled: true
+    addr: ":8080"
+  syslog:
+    enabled: true
+    udp_addr: ":5514"
+    tcp_addr: ":5514"
+  tcp_stream:
+    enabled: false
+    addr: ":9000"
+  file_tail:
+    enabled: true
+    start_at_end: true
+    files:
+      - "./nfc.log"
+  kafka:
+    enabled: false
+    brokers: ["localhost:9092"]
+    topic: "nfc-events"
+    group_id: "rfguard"
+  parser:
+    timezone: "UTC"
+    default_reader_id: "unknown"
+
+detection:
+  windows: ["1s", "10s", "60s"]
+  aps_threshold: 20
+  failure_ratio_threshold: 0.7
+  uid_diversity_threshold: 0.6
+  timing_variance_threshold: 0.02
+  attack_score_threshold: 100
+  weights:
+    aps: 1.0
+    fr: 50.0
+    uds: 40.0
+    tv: 1.0
+  epsilon: 0.0001
+  min_attempts: 10
+  aps_elevated_threshold: 10
+  alert_cooldown: "5s"
+  dedupe_window: "1s"
+  max_clock_skew: "2s"
+  max_future_skew: "2s"
+
+access_control:
+  enabled: false
+  whitelist_only: false
+  whitelist:
+    - "04AABBCC"
+  blacklist:
+    - "DEADBEEF"
+  reader_whitelists:
+    reader01:
+      - "A1B2C3D4"
+  reader_blacklists:
+    reader02:
+      - "BAD0BAD0"
+
+api:
+  enabled: true
+  addr: ":8081"
+
+storage:
+  enabled: false
+  driver: "sqlite"
+  dsn: "file:rfguard.db?_pragma=busy_timeout(5000)"
+
+metrics:
+  store_limit: 5000
+
+alerts:
+  store_limit: 1000

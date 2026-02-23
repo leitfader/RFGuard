@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RFGuard Access Control</title>
+  <link rel="stylesheet" href="/ui/styles.css" />
+</head>
+<body class="page-access">
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="title">RFGuard</div>
+        <div class="subtitle">Access Control Policies</div>
+      </div>
+      <nav class="nav">
+        <a href="/ui/">Dashboard</a>
+        <a href="/ui/alerts.html">Alerts</a>
+        <a class="active" href="/ui/access.html">Access Control</a>
+      </nav>
+    </header>
+
+    <main class="layout single">
+      <section class="card alerts-full">
+        <div class="card-header">
+          <h2>Access Control</h2>
+          <span id="save-status" class="muted"></span>
+        </div>
+
+        <div class="notice">
+          Access control is passive. RFGuard will alert on policy violations without interfering with reader traffic.
+        </div>
+
+        <div class="form-grid" style="margin-top: 16px;">
+          <div class="toggle">
+            <input type="checkbox" id="ac-enabled" />
+            <label for="ac-enabled">Enable access control alerts</label>
+          </div>
+          <div class="toggle">
+            <input type="checkbox" id="ac-whitelist-only" />
+            <label for="ac-whitelist-only">Whitelist-only mode (alert if UID not allowed)</label>
+          </div>
+
+          <div>
+            <label for="ac-whitelist">Global whitelist (one UID per line)</label>
+            <textarea id="ac-whitelist" rows="6" placeholder="04AABBCC"></textarea>
+          </div>
+
+          <div>
+            <label for="ac-blacklist">Global blacklist (one UID per line)</label>
+            <textarea id="ac-blacklist" rows="6" placeholder="DEADBEEF"></textarea>
+          </div>
+
+          <div>
+            <label for="ac-reader-whitelist">Reader-specific whitelist (reader: UID1, UID2)</label>
+            <textarea id="ac-reader-whitelist" rows="5" placeholder="reader01: A1B2C3D4, BEEFCAFE"></textarea>
+          </div>
+
+          <div>
+            <label for="ac-reader-blacklist">Reader-specific blacklist (reader: UID1, UID2)</label>
+            <textarea id="ac-reader-blacklist" rows="5" placeholder="reader02: BAD0BAD0"></textarea>
+          </div>
+
+          <div class="controls">
+            <button id="save-access">Save Access Control</button>
+          </div>
+        </div>
+
+        <div class="footer-note">
+          Changes are saved to the active config file and applied immediately.
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/ui/access.js"></script>
+</body>
+</html>

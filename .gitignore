@@ -1,0 +1,17 @@
+# Binaries
+rfguard
+loggen
+
+# Logs / generated
+nfc.log
+*.log
+
+# Local databases
+*.db
+
+# Build caches
+/dist
+/bin
+
+# OS files
+.DS_Store
