@@ -192,7 +192,7 @@ Alerts detail view:
 http://localhost:8081/ui/alerts.html
 ```
 
-Admin controls are available on the Access Control page to clear metrics, clear alerts, or restart the engine state.
+Admin controls are available on both the dashboard and Access Control page to clear metrics, clear alerts, or restart the engine state.
 
 ## Tests
 

@@ -6,6 +6,10 @@ const readerWhitelistEl = document.getElementById('ac-reader-whitelist');
 const readerBlacklistEl = document.getElementById('ac-reader-blacklist');
 const saveBtn = document.getElementById('save-access');
 const saveStatus = document.getElementById('save-status');
+const clearAlertsBtn = document.getElementById('clear-alerts');
+const clearMetricsBtn = document.getElementById('clear-metrics');
+const restartBtn = document.getElementById('restart-engine');
+const adminStatus = document.getElementById('admin-status');
 
 let isLoading = false;
 
@@ -13,6 +17,12 @@ function setStatus(message, isError) {
   if (!saveStatus) return;
   saveStatus.textContent = message || '';
   saveStatus.style.color = isError ? '#c03535' : '';
+}
+
+function setAdminStatus(message, isError) {
+  if (!adminStatus) return;
+  adminStatus.textContent = message || '';
+  adminStatus.style.color = isError ? '#c03535' : '';
 }
 
 async function fetchJSON(url, options) {
@@ -58,6 +68,7 @@ function toReaderMap(value) {
 function mapToLines(map) {
   if (!map) return '';
   return Object.keys(map)
+    .sort((a, b) => a.localeCompare(b))
     .map((reader) => `${reader}: ${map[reader].join(', ')}`)
     .join('\n');
 }
@@ -135,6 +146,50 @@ if (readerWhitelistEl) {
 
 if (readerBlacklistEl) {
   readerBlacklistEl.addEventListener('input', debouncedSave);
+}
+
+if (clearAlertsBtn) {
+  clearAlertsBtn.addEventListener('click', async () => {
+    setAdminStatus('Clearing alerts...');
+    try {
+      await fetchJSON('/admin/clear', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ target: 'alerts' }),
+      });
+      setAdminStatus('Alerts cleared.');
+    } catch (err) {
+      setAdminStatus('Failed to clear alerts.', true);
+    }
+  });
+}
+
+if (clearMetricsBtn) {
+  clearMetricsBtn.addEventListener('click', async () => {
+    setAdminStatus('Clearing metrics...');
+    try {
+      await fetchJSON('/admin/clear', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ target: 'metrics' }),
+      });
+      setAdminStatus('Metrics cleared.');
+    } catch (err) {
+      setAdminStatus('Failed to clear metrics.', true);
+    }
+  });
+}
+
+if (restartBtn) {
+  restartBtn.addEventListener('click', async () => {
+    setAdminStatus('Restarting engine...');
+    try {
+      await fetchJSON('/admin/restart', { method: 'POST' });
+      setAdminStatus('Engine restarted.');
+    } catch (err) {
+      setAdminStatus('Failed to restart engine.', true);
+    }
+  });
 }
 
 loadAccessControl();

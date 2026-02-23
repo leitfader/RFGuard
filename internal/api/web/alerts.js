@@ -30,6 +30,7 @@ async function fetchJSON(url, options) {
 function contextToString(context) {
   if (!context) return '-';
   return Object.keys(context)
+    .sort((a, b) => a.localeCompare(b))
     .map((key) => `${key}=${context[key]}`)
     .join(' ');
 }
